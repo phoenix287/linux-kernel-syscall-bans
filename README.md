@@ -34,7 +34,6 @@ For example, `'5'` bans `getpid` and `kill`, and `'7'` bans all three. A banned 
 | `include/linux/syscalls.h` | Declared the four new syscalls |
 | `arch/x86/entry/syscalls/syscall_64.tbl` | Registered syscall numbers 334–337 |
 | `kernel/hw2.c` (new) | Implementation of the new syscalls |
-| `kernel/Makefile` | Added `hw2.o` to the build |
 | `kernel/sys.c` | Ban check in `getpid` |
 | `fs/pipe.c` | Ban check in `pipe` |
 | `kernel/signal.c` | Ban check in `kill` |
@@ -44,6 +43,8 @@ For example, `'5'` bans `getpid` and `kill`, and `'7'` bans all three. A banned 
 Built and tested in the course-provided Linux environment (VM image supplied by the course staff), on kernel 4.15.0. The files here are meant to be copied into that kernel tree at the same paths.
 
 To try it, call the new syscalls from user space, e.g. `syscall(334, 0, 1, 0);` bans `pipe` for the current process (as root).
+
+- Build setup: add `hw2.o` to the object list in `kernel/Makefile` so that `kernel/hw2.c` gets compiled (this file is not included here).
 
 ## Notes
 
