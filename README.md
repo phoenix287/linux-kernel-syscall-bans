@@ -2,7 +2,7 @@
 
 A Linux kernel modification (university OS coursework, C) that lets a process be restricted from calling selected system calls. It adds a new per-process field to `task_struct`, four new system calls to manage it, and enforcement checks inside three existing system calls.
 
-> This repo contains only the files I changed, not the full kernel tree. They are based on Linux kernel **[VERSION, e.g. 4.15.x]**.
+> This repo contains only the files I changed, not the full kernel tree. They are based on Linux kernel VERSION 4.15.0.
 
 ## What it does
 
@@ -41,13 +41,10 @@ For example, `'5'` bans `getpid` and `kill`, and `'7'` bans all three. A banned 
 
 ## Building and testing
 
-1. Copy the files above into a Linux kernel source tree of the version listed at the top, keeping the same paths.
-2. Build and install the kernel as usual (`make`, `make modules_install`, `make install`), then boot it, preferably in a VM.
-3. Call the new syscalls from user space, e.g. `syscall(334, 0, 1, 0);` to ban `pipe` for the current process (as root).
+Built and tested in the course-provided Linux environment (VM image supplied by the course staff), on kernel 4.15.0. The files here are meant to be copied into that kernel tree at the same paths.
 
-How I tested: [describe, e.g. wrote a small user-space program that sets bans and checks that `getpid`/`pipe`/`kill` return `-EPERM`, and tested `flip_ban_branch` on a chain of forked processes].
+To try it, call the new syscalls from user space, e.g. `syscall(334, 0, 1, 0);` bans `pipe` for the current process (as root).
 
 ## Notes
 
 - Developed as a course assignment; the kernel files are derived from the Linux kernel and are therefore under GPL-2.0.
-- [Optional: mention anything you'd improve, e.g. replacing the character encoding with named bit flags.]
